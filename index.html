@@ -17,15 +17,15 @@
         <h1>EXTINCT INDEX</h1>
         <nav>
             <input type="text" id="searchInput" class="hidden" placeholder="Search...">
+            <button id="mapBtn">MAP</button>
             <button id="searchBtn">SEARCH</button>
             <button id="shuffleBtn">SHUFFLE</button>
-            <button id="mapBtn">MAP</button>
             <button id="indexBtn">INDEX</button>
         </nav>
     </header>
 
     <main>
-        <!-- Left panel -->
+        <!-- Info panel (desktop: floating card / mobile: bottom sheet) -->
         <section id="infoPanel" class="hidden">
             <div class="info-fields">
                 <div class="info-row">
@@ -55,11 +55,20 @@
 
         <!-- Index list -->
         <section id="listSection" class="hidden">
+            <!-- Mobile header inside list (replaces main header visually) -->
             <div class="list-header">
                 <h2>EXTINCT INDEX</h2>
+                <!-- Mobile nav row cloned for the list view -->
+                <nav class="list-nav">
+                    <button id="mapBtnList">MAP</button>
+                    <button id="searchBtnList">SEARCH</button>
+                    <button id="shuffleBtnList">SHUFFLE</button>
+                    <button id="indexBtnList" class="active">INDEX</button>
+                </nav>
             </div>
             <ul id="listContainer"></ul>
         </section>
+
         <!-- Shuffle / Loading overlay -->
         <div id="shuffleOverlay" class="hidden">
             <div class="shuffle-dots">
@@ -74,6 +83,29 @@
     <!-- JS -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <script src="js/script.js"></script>
+
+    <!-- Wire up the duplicated list-nav buttons on mobile -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const wire = (id, target) => {
+          const el = document.getElementById(id);
+          const orig = document.getElementById(target);
+          if (el && orig) el.addEventListener('click', () => orig.click());
+        };
+        wire('mapBtnList',     'mapBtn');
+        wire('searchBtnList',  'searchBtn');
+        wire('shuffleBtnList', 'shuffleBtn');
+        wire('indexBtnList',   'indexBtn');
+
+        // Measure real header height and set CSS var for main height calc
+        function setHeaderHeight() {
+          const h = document.querySelector('header').offsetHeight;
+          document.documentElement.style.setProperty('--mobile-header-h', h + 'px');
+        }
+        setHeaderHeight();
+        window.addEventListener('resize', setHeaderHeight);
+      });
+    </script>
 </body>
 
 </html>
