@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extinct Index</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Mapbox CSS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+
+    <header>
+        <h1>EXTINCT INDEX</h1>
+        <nav>
+            <input type="text" id="searchInput" class="hidden" placeholder="Search...">
+            <button id="searchBtn">SEARCH</button>
+            <button id="shuffleBtn">SHUFFLE</button>
+            <button id="mapBtn">MAP</button>
+            <button id="indexBtn">INDEX</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Left panel -->
+        <section id="infoPanel" class="hidden">
+            <div class="info-fields">
+                <div class="info-row">
+                    <span class="info-label">Bio Name</span>
+                    <span class="info-value" id="animalBioName">—</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Common Name</span>
+                    <span class="info-value" id="animalCommon">—</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Location</span>
+                    <span class="info-value" id="animalLocation">—</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Last recorded</span>
+                    <span class="info-value" id="animalYear">—</span>
+                </div>
+            </div>
+            <div class="info-image-wrap">
+                <img id="animalImage" src="" alt="">
+            </div>
+        </section>
+
+        <!-- MAP -->
+        <section id="map"></section>
+
+        <!-- Index list -->
+        <section id="listSection" class="hidden">
+            <div class="list-header">
+                <h2>EXTINCT INDEX</h2>
+            </div>
+            <ul id="listContainer"></ul>
+        </section>
+        <!-- Shuffle / Loading overlay -->
+        <div id="shuffleOverlay" class="hidden">
+            <div class="shuffle-dots">
+                <span class="dot dot-purple"></span>
+                <span class="dot dot-lime"></span>
+                <span class="dot dot-purple"></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
