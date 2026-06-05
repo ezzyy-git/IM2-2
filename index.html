@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extinct Index</title>
     <link rel="stylesheet" href="css/styles.css">
-
+ 
     <!-- Mapbox CSS -->
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
 </head>
-
+ 
 <body>
-
+ 
     <header>
         <h1>EXTINCT INDEX</h1>
         <nav>
@@ -23,7 +23,7 @@
             <button id="indexBtn">INDEX</button>
         </nav>
     </header>
-
+ 
     <main>
         <!-- Info panel (desktop: floating card / mobile: bottom sheet) -->
         <section id="infoPanel" class="hidden">
@@ -49,10 +49,10 @@
                 <img id="animalImage" src="" alt="">
             </div>
         </section>
-
+ 
         <!-- MAP -->
         <section id="map"></section>
-
+ 
         <!-- Index list -->
         <section id="listSection" class="hidden">
             <!-- Mobile header inside list (replaces main header visually) -->
@@ -68,7 +68,7 @@
             </div>
             <ul id="listContainer"></ul>
         </section>
-
+ 
         <!-- Shuffle / Loading overlay -->
         <div id="shuffleOverlay" class="hidden">
             <div class="shuffle-dots">
@@ -77,13 +77,13 @@
                 <span class="dot dot-purple"></span>
             </div>
         </div>
-
+ 
     </main>
-
+ 
     <!-- JS -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <script src="js/script.js"></script>
-
+ 
     <!-- Wire up the duplicated list-nav buttons on mobile -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -96,7 +96,7 @@
         wire('searchBtnList',  'searchBtn');
         wire('shuffleBtnList', 'shuffleBtn');
         wire('indexBtnList',   'indexBtn');
-
+ 
         // Measure real header height and set CSS var for main height calc
         function setHeaderHeight() {
           const h = document.querySelector('header').offsetHeight;
@@ -107,5 +107,5 @@
       });
     </script>
 </body>
-
+ 
 </html>

@@ -1,5 +1,4 @@
-
-// MAPBOX SETUP//
+// MAPBOX SETUP //
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibnVyaWFicnVlbGlzYXVlciIsImEiOiJjbW92aTVkZG8wNXR2MnBzZ3JxcjVuM3gwIn0.37g-sqCMaNhMG99LwuLefw';
 
@@ -90,8 +89,6 @@ function placeMarkers() {
 
 // INFO PANEL //
 
-// INFO PANEL //
-
 const infoPanel = document.getElementById("infoPanel");
 
 function openInfoPanel(animal) {
@@ -142,8 +139,28 @@ function fillList() {
 // NAVIGATION BUTTONS //
 
 const searchInput = document.getElementById("searchInput");
+const shuffleOverlay = document.getElementById("shuffleOverlay");
+const indexBtn = document.getElementById("indexBtn");
+const mapBtn = document.getElementById("mapBtn");
+const shuffleBtn = document.getElementById("shuffleBtn");
+const searchBtn = document.getElementById("searchBtn");
 
-document.getElementById("searchBtn").addEventListener("click", () => {
+// Set active state: only mapBtn gets lime when on map, all others get purple
+function setActiveButton(activeBtn) {
+    [mapBtn, indexBtn, searchBtn, shuffleBtn].forEach(btn => {
+        btn.classList.remove("active");
+    });
+    if (activeBtn) {
+        activeBtn.classList.add("active");
+    }
+}
+
+// On page load, MAP is the default view → MAP button is active (lime)
+setActiveButton(mapBtn);
+
+// SEARCH
+searchBtn.addEventListener("click", () => {
+    setActiveButton(null); // no active button — map btn goes purple
     searchInput.classList.toggle("hidden");
     if (!searchInput.classList.contains("hidden")) {
         searchInput.focus();
@@ -171,22 +188,12 @@ searchInput.addEventListener("keydown", (e) => {
     }
 });
 
-const shuffleOverlay = document.getElementById("shuffleOverlay");
-const indexBtn = document.getElementById("indexBtn");
-const mapBtn = document.getElementById("mapBtn");
-const shuffleBtn = document.getElementById("shuffleBtn");
-
-function clearActiveButtons() {
-    indexBtn.classList.remove("active");
-    mapBtn.classList.remove("active");
-}
-
+// SHUFFLE
 shuffleBtn.addEventListener("click", () => {
     if (geocodedAnimals.length === 0) return;
 
-    clearActiveButtons();
+    setActiveButton(null); // map btn goes purple during shuffle
 
-    // Show loading overlay
     infoPanel.classList.add("hidden");
     listSection.classList.add("hidden");
     searchInput.classList.add("hidden");
@@ -201,9 +208,9 @@ shuffleBtn.addEventListener("click", () => {
     }, 1500);
 });
 
+// MAP
 mapBtn.addEventListener("click", () => {
-    clearActiveButtons();
-    mapBtn.classList.add("active");
+    setActiveButton(mapBtn); // lime only here
     infoPanel.classList.add("hidden");
     listSection.classList.add("hidden");
     searchInput.classList.add("hidden");
@@ -211,9 +218,9 @@ mapBtn.addEventListener("click", () => {
     map.flyTo({ center: [10, 20], zoom: 2, duration: 1200 });
 });
 
+// INDEX
 indexBtn.addEventListener("click", () => {
-    clearActiveButtons();
-    indexBtn.classList.add("active");
+    setActiveButton(indexBtn); // index active, map goes purple
     infoPanel.classList.add("hidden");
     searchInput.classList.add("hidden");
     shuffleOverlay.classList.add("hidden");

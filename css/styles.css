@@ -371,12 +371,6 @@ main {
     width: 100%;
   }
 
-  /* MAP button is lime/active by default on mobile */
-  #mapBtn {
-    background: var(--lime);
-    color: var(--black);
-  }
-
   /* ── MAIN / MAP ──────────────────────────────────────────── */
 
   main {
@@ -531,9 +525,4 @@ main {
     color: var(--black);
   }
 
-  /* INDEX button is active/lime in index view */
-  #indexBtnList {
-    background: var(--lime);
-    color: var(--black);
-  }
 }
